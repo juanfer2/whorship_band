@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package wompi;
+
+option go_package = "github.com/juanfer2/src/wompi;wompipb";
+
+import "google/protobuf/timestamp.proto";
+
+
+message CreditCardProductMessage {
+  string id = 1;
+  string name = 2;
+  string bin = 3;
+  string type = 4;
+  string token = 5;
+  int32 sourceID = 6;
+  string mask = 7;
+
+  google.protobuf.Timestamp createdAt = 8;
+  google.protobuf.Timestamp updatedAt = 9;
+}
+
+message CreditCardParams {
+  string number = 1;
+  string expMonth = 2;
+  string expYear = 3;
+  string cvc = 4;
+  string cardHolder = 5;
+  string customerEmail = 6;
+}
+
+message TransactionMessage {
+  string reference = 1;
+  optional CreditCard CreditCard = 2;
+  optional int32 SourceId = 3;
+  int32 price = 4;
+  string Currency = 5;
+  Costumer costumer = 6;
+}
+
+message Costumer {
+  string fullName = 1;
+  string email = 2;
+  optional string phone = 3;
+}
+
+
+message CreditCard {
+  string number = 1;
+  string expMonth = 2;
+  string expYear = 3;
+  string cvc = 4;
+  string cardHolder = 5;
+  string customerEmail = 6;
+}
+
+
+message TransactionRequest {
+  string reference = 1;
+  optional CreditCard CreditCard = 2;
+  optional int32 SourceId = 3;
+  int32 price = 4;
+  string Currency = 5;
+  Costumer costumer = 6;
+}
+
+message GetTransactionDataRequest {
+  string name = 1;
+}
+
+
+message GetTransactionParams {
+  string id = 1;
+}
+
+// message SetB2ChatResponse {
+//   string id = 1;
+// }
+
+service WompiService {
+  rpc CreateTransacction(TransactionRequest) returns (TransactionMessage);
+  rpc GetTransactionById(GetTransactionParams) returns (TransactionMessage);
+  rpc CreateCreditCardProduct(CreditCardParams) returns (CreditCardProductMessage);
+  //rpc GetB2ChatData(stream GetTransactionDataRequest) returns (stream TransactionMessage);
+  // rpc SetB2Chat(B2ChatMessage) returns (SetB2ChatResponse);
+}
+
+
+/*
+{
+    "amount_in_cents": 2500000,
+    "currency": "COP",
+    "customer_data": {
+        "phone_number": "+573005138128",
+        "full_name": "Juan Fernando Villadiego"
+    },
+    "acceptance_token": "eyJhbGciOiJIUzI1NiJ9.eyJjb250cmFjdF9pZCI6MSwicGVybWFsaW5rIjoiaHR0cHM6Ly93b21waS5jby93cC1jb250ZW50L3VwbG9hZHMvMjAxOS8wOS9URVJNSU5PUy1ZLUNPTkRJQ0lPTkVTLURFLVVTTy1VU1VBUklPUy1XT01QSS5wZGYiLCJmaWxlX2hhc2giOiIzZGNkMGM5OGU3NGFhYjk3OTdjZmY3ODExNzMxZjc3YiIsImppdCI6IjE2Nzc4ODAzMTQtNTY3MjEiLCJleHAiOjE2Nzc4ODM5MTR9.suABTwVKUSNgESHBEjgUgBNdshsv_qRuQEk3mPdtiaA",
+    "customer_email": "pepito_perez@example.com",
+    "reference": "2322er3234ed4123-sd",
+    "payment_method": {
+        "installments": 1
+    },
+    "payment_source_id": 277
+}
+*/

@@ -1,0 +1,6 @@
+type Song {
+  id:   ID!
+	name: String
+	url:  String
+	tone: String
+}
