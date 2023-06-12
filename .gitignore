@@ -16,3 +16,5 @@ src/shared/infrastructure/clients/wompi/config/*.yml
 
 cover.out
 coverage.out
+
+_.git
