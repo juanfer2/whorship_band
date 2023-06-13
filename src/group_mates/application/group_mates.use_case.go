@@ -31,7 +31,7 @@ func (uc *GroupMateUseCase) CreateInBatches(groupMates []group_mate_domain.Group
 }
 
 func (uc *GroupMateUseCase) GetAll() []group_mate_domain.GroupMate {
-	return uc.repository.All()
+	return uc.repository.WhereWithAssociation()
 }
 
 func (uc *GroupMateUseCase) Delete(id string) (group_mate_domain.GroupMate, error) {

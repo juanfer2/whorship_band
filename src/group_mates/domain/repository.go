@@ -9,7 +9,7 @@ type GroupMateRepository interface {
 	CreateInBatches(groupMates []GroupMate)
 	All() []GroupMate
 	FindByUuidWithInstruments(id string) []GroupMate
-	WhereWithAssociation(associations []string, query any, arg ...any) []GroupMate
+	WhereWithAssociation() []GroupMate
 	FindWithAssociation(associations []string, query any, arg ...any) GroupMate
 	Delete(groupMate GroupMate) GroupMate
 	WhereBy(query any, arg ...any) GroupMate

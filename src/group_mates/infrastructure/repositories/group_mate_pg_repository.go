@@ -26,3 +26,10 @@ func (p *GroupMatePGRepository) FindByUuidWithInstruments(id string) []group_mat
 
 	return groupMates
 }
+
+func (p *GroupMatePGRepository) WhereWithAssociation() []group_mate_domain.GroupMate {
+	var groupMates []group_mate_domain.GroupMate
+	p.PostgresRepository.Preload("Instruments", "Instruments.Instrument").Find(&groupMates)
+
+	return groupMates
+}
